@@ -1,9 +1,10 @@
+package geometryTask;
 /**
  * Every Geometry represents a body in a data-space with {@link #dimensions()}.
  *
  * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
  */
-public abstract class Geometry {
+public abstract class Geometry implements Comparable {
 
    /**
     * Holds the number of dimensions for this Geometry.
@@ -53,4 +54,43 @@ public abstract class Geometry {
     * @throws RuntimeException if the type of <code>other</code> is unknown
     */
    public abstract Geometry encapsulate(Geometry other);
+   
+   //****************************************************************************************************************
+   /**
+    * Methode returned einen double-Array mit den minimalen
+    * Werten der Koordinanten aus Punkt eins und zwei
+    * @paaram minimaleer Punkt, eines Volumens (?)
+   **/
+   public double[] minimum(double[] eins, double[] zwei){
+   	assert(eins.length == zwei.length): "Fehler! Bei unterschiedliche Dimensionen der Arrays ist keine minimum-Suche möglich";
+       double[] result = new double[eins.length];
+       for(int i = 0; i < eins.length; i++){
+           result[i] = Math.min(eins[i], zwei[i]);
+       }
+       return result;
+   }
+
+   /**
+    * Methode returnt einen double-Array mit den maximalen
+    * Werten der Koordinanten aus Punkt eins und zwei
+    * @paaram maximaler Punkt (eines Volumenss?)
+   **/
+   public double[] maximum(double[] eins, double[] zwei){
+   	assert(eins.length == zwei.length): "Fehler! Bei unterschiedlichen Dimensionen der Arrays ist keine minimum-Suche möglich";
+       double[] result = new double[eins.length];
+       for(int i = 0; i < eins.length; i++){
+           result[i] = Math.max(eins[i], zwei[i]);
+       }
+       return result;
+   }
+   
+   /**
+    * Methode vergleicht das Volumen mit dem übergebenen Geometry Object
+    * @param zu vergleichendes Geometry-Object
+    * @return boolean Wert, Volumen der Objekte ist gleich:true, ansonsten false
+    */
+   public boolean compare(Geometry other) {
+   	return this.volume() == other.volume();
+   	
+   }
 }
